@@ -1,0 +1,23 @@
+% Находимся на конце...
+
+% function [res] = buildAnalysys(Data, CalcData, AdditionalData)
+    disp("Откройте окно Simulink");
+    
+%     [num, den] = numden(AdditionalData('WsDef'));
+    s = sym('s');
+    Ws = 585/(8 *((9*s^2)/25000 + (49*s)/1000 + 1));
+    [num, den] = numden(Ws);
+    num = sym2poly(num); den = sym2poly(den);
+    num = num / den(3); den = den / den(3);
+
+    simNum = mat2str(num); simDen = mat2str(den);
+    
+    Kd = 0;
+    Ki = 1;
+    Kp = 1;
+    N = Data('Ng');
+
+    set_param('demon_sim/TransferFcn', 'Numerator', simNum);
+    set_param('demon_sim/TransferFcn', 'Denominator', simDen);
+    set_param('demon_sim/')
+% end
