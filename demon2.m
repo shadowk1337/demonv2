@@ -38,7 +38,7 @@ function main()
     
     disp(newline + "******Данные из ДЗ2******" + newline);
 
-    Data('Sigm')  = input('Введите σ (сигму): ');
+    Data('Sigm')  = input('Введите σ (сигму) в процентах: ');
     Data('Tmax')  = input('Введите Tпмакс: ');
     Data('Emax')  = input('Введите Eмакс: ');
 
