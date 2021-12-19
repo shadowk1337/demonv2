@@ -43,16 +43,16 @@ function [res] = rootHodograph(Data, CalcData, AdditionalData)
     % Костыль
     DsCoeffs = round(coeffs(num), 5);
     MSize = max(size(DsCoeffs));
-    c11 = round(DsCoeffs(MSize - 1), 5);
-    c21 = round(DsCoeffs(MSize - 3), 5);
+    c11 = vpa(DsCoeffs(MSize - 1), 5);
+    c21 = vpa(DsCoeffs(MSize - 3), 5);
     c31 = 0;
-    c12 = round(DsCoeffs(MSize - 2), 5);
-    c22 = round(DsCoeffs(4) * k, 5);
+    c12 = vpa(DsCoeffs(MSize - 2), 5);
+    c22 = vpa(DsCoeffs(4) * k, 5);
     c32 = 0;
-    c13 = round(c21 - vpa((c11 / c12), 3) * c22, 5);
-    c23 = round(c31 - (c11 / c12) * c32, 5);
+    c13 = vpa(c21 - vpa((c11 / c12), 3) * c22, 5);
+    c23 = vpa(c31 - (c11 / c12) * c32, 5);
     c33 = 0;
-    c14 = round(c22 - (c12 / c13) * c23, 5);
+    c14 = vpa(c22 - (c12 / c13) * c23, 5);
     c24 = 0;
     c34 = 0;
     
