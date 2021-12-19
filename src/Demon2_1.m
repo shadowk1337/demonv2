@@ -47,18 +47,20 @@ function [res] = findSynthesis(Data, CalcData, AdditionalData)
     T1 = min(dend1(1), dend1(2)) / max(dend1(1), dend1(2));
     T2 = min(dend2(1), dend2(2)) / max(dend2(1), dend2(2));
 
+    disp("T1 = "); disp(vpa(T1, 5));
+    disp("T2 = "); disp(vpa(T2, 5));
+
     wc1 = round(min(1 / T1, 1 / T2));
     wc2 = round(max(1 / T2, 1 / T1));
     wcK = 1;
 
-    disp("Твой коэффицент усиления ");
-    disp(K);
     disp("Графики должны пересекаться. Притом зелёный график " + ...
         "должен быть ниже." + newline + "Если графики не " + ...
         "пересекаются, измените коэффициент усиления");
 
     choice = 'y';
     while (choice == 'y')
+        disp("Ваш коэффицент усиления:"); disp(K);
         disp("20log(K) = ");
         disp(vpa(20 * log10(K), 5));
 
@@ -72,14 +74,10 @@ function [res] = findSynthesis(Data, CalcData, AdditionalData)
         yHigher = [wBeginY, wcKY, wc1Y, wc2Y, wEndY];
 
         disp("Точки перегиба графиков");
-        disp("Точка 2 ");
-        disp(wc1);
-        disp("Точка 3 ");
-        disp(wLow);
-        disp("Точка 4 ");
-        disp(wc2);
-        disp("Точка 5 ");
-        disp(wHigh);
+        disp("Точка 2:");disp(wc1);
+        disp("Точка 3:");disp(wLow);
+        disp("Точка 4:");disp(wc2);
+        disp("Точка 5:");disp(wHigh);
 
         semilogx(xLower, yLower, 'g', 'LineWidth', 2);
         grid on
@@ -89,14 +87,14 @@ function [res] = findSynthesis(Data, CalcData, AdditionalData)
 
         choice = input("Изменить коэффициент усиления? [y/n]: ", 's');
         if (ischar(choice) && lower(choice) == 'y')
-            disp("Совет: изменяйте коэффициент усиления в 5, 10, 100 раз");
-            K = input('НОВЫЙ коэффициент усиления K: ');
+            K = input('Новый коэффициент усиления K: ');
             cla reset;
             [num, den] = numden(AdditionalData('Ws'));
             den = sym2poly(den);
             den = den / den(3);
             x = sym('x'); s = sym('s');
             AdditionalData('Ws') = subs(K / poly2sym(den), x, s);
+            disp("Новая передаточная функция размокнутой системы:");
             disp(AdditionalData('Ws'));
         end
     end    

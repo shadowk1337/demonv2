@@ -62,7 +62,8 @@ function [res] = analysys(Data, CalcData, AdditionalData)
     vc = sort(vc);
     vc(vc == 0) = []; % удаление 0 из массива
     disp("Vc от vc1 до vc5");
-    disp(vc);disp(k);
+    disp(vc);
+    disp("K = "); disp(k);
     kHigh = 20 * log10(k);
     disp("20 * log(k) = ");
     disp(kHigh);
